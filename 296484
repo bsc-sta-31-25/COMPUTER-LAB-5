@@ -1,0 +1,65 @@
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <cctype>
+using namespace std;
+
+string Reverse(string text) {
+    reverse(text.begin(), text.end());
+    return text;
+}
+
+int main() {
+    string fileData, word;
+    int vowels = 0, words = 0;
+
+    ifstream file("data.txt");
+
+    if (!file) {
+        cout << "File not found!";
+        return 1;
+    }
+
+    getline(file, fileData);
+    file.close();
+
+    // Count vowels
+    for (char c : fileData) {
+        c = tolower(c);
+
+        if (c == 'a' || c == 'e' || c == 'i' ||
+            c == 'o' || c == 'u')
+            vowels++;
+    }
+
+    // Count words
+    stringstream ss(fileData);
+
+    while (ss >> word)
+        words++;
+
+    cout << "Original statement: " << fileData << endl;
+    cout << "Number of vowels: " << vowels << endl;
+    cout << "Number of words: " << words << endl;
+
+    // Reverse statement
+    cout << "Reversed statement: " << Reverse(fileData) << endl;
+
+    // Capitalize second letter of each word
+    stringstream s(fileData);
+
+    cout << "Second letters capitalized: ";
+
+    while (s >> word) {
+        if (word.length() > 1)
+            word[1] = toupper(word[1]);
+
+        cout << word << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
