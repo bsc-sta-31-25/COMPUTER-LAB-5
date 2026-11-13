@@ -5,7 +5,7 @@ using namespace std;
 int main() {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> dist(0, 11);
+    uniform_int_distribution<int> dist(0, 11);
 
     int daysUntilExpiration = dist(gen);
 
